@@ -7,12 +7,15 @@
 $(function(){
     layouts();
     routers();
+    //var pageURL = window.location.href;
+    //var lastURLSegment = pageURL.substr(pageURL.lastIndexOf('/') + 1);
+    //console.log(lastURLSegment);
 });
 
 // Load Function for Header & Footer
 function layouts() {
     // Load Main App
-    document.querySelector("coredova-app").innerHTML ='<coredova-header></coredova-header><coredova-main class="container"></coredova-main><coredova-footer></coredova-footer>';
+    document.querySelector("coredova-app").innerHTML ='<coredova-overlay onclick="closeSide()"></coredova-overlay><coredova-header></coredova-header><coredova-main class="container"></coredova-main><coredova-footer></coredova-footer>';
 
     // Load Header
     fetch("./pages/layouts/header.html")
@@ -154,4 +157,26 @@ function getvar(name,url) {
     if (!results) return null;
     if (!results[2]) return '';
     return decodeURIComponent(results[2].replace(/\+/g, " "));
+}
+
+// Open Sidebar
+function openSideLeft() {
+    document.querySelector("coredova-sidebar-left").style.display = "block";
+    document.querySelector("coredova-overlay").style.display = "block";
+}
+function openSideRight() {
+    document.querySelector("coredova-sidebar-right").style.display = "block";
+    document.querySelector("coredova-overlay").style.display = "block";
+}
+function openSideBottom() {
+    document.querySelector("coredova-sidebar-bottom").style.display = "block";
+    document.querySelector("coredova-overlay").style.display = "block";
+}
+  
+// Close Sidebar
+function closeSide() {
+    document.querySelector("coredova-sidebar-left").style.display = "none";
+    document.querySelector("coredova-sidebar-right").style.display = "none";
+    document.querySelector("coredova-sidebar-bottom").style.display = "none";
+    document.querySelector("coredova-overlay").style.display = "none";
 }
