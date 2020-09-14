@@ -30,8 +30,8 @@ coredova-overlay {
 coredova-header .mainNav {
   line-height: 1;
   border-bottom: 1px solid #e5e5e5;
-  padding-bottom: 1rem;
-  padding-top: 1rem;
+  padding-bottom: 10px;
+  padding-top: 10px;
 }
 
 coredova-header .mainNav i {
@@ -41,7 +41,7 @@ coredova-header .mainNav i {
 
 coredova-header .mainLogo {
   font-family: "Playfair Display", Georgia, "Times New Roman", serif;
-  font-size: 2.25rem; 
+  font-size: 1.5rem; 
 }
 
 /* CoreDova Sidebar */
@@ -54,7 +54,7 @@ coredova-sidebar-left {
   left: 0;
   background-color: #fff;
   overflow-x: hidden;
-  transition: visibility 0s, opacity 0.5s linear;
+  transition: opacity 2s ease-out;
   display: none;
 }
 
@@ -67,7 +67,7 @@ coredova-sidebar-right {
   right: 0;
   background-color: #fff;
   overflow-x: hidden;
-  transition: visibility 0s, opacity 0.5s linear;
+  transition: opacity 2s ease-out;
   display: none;
 }
 
@@ -79,7 +79,7 @@ coredova-sidebar-bottom {
   bottom: 0;
   background-color: #fff;
   overflow-x: hidden;
-  transition: visibility 0s, opacity 0.5s linear;
+  transition: opacity 2s ease-out;
   display: none;
   border-top-left-radius:40px;
   border-top-right-radius:40px;
