@@ -4,6 +4,7 @@
  * Date : 2020-09-14
  */
 
+// Load Page
 $(function(){
     layouts();
     routers();
@@ -15,7 +16,7 @@ $(function(){
 // Load Function for Header & Footer
 function layouts() {
     // Load Main App
-    document.querySelector("coredova-app").innerHTML ='<coredova-overlay onclick="closeSide()"></coredova-overlay><coredova-header></coredova-header><coredova-main class="container"></coredova-main><coredova-footer></coredova-footer>';
+    document.querySelector("coredova-app").innerHTML ='<coredova-overlay onclick="closeSide()"></coredova-overlay><coredova-header></coredova-header><coredova-main></coredova-main><coredova-footer></coredova-footer>';
 
     // Load Header
     fetch("./pages/layouts/header.html")
@@ -51,6 +52,7 @@ function routers() {
             })
                 .then(data => {
                     document.querySelector("coredova-main").innerHTML = data;
+                    $("#page"+mainPage).addClass("text-white bg-primary");
                 });
         // Get Custom CSS from Main Page
         $.ajax({
@@ -87,64 +89,132 @@ function routers() {
             },
         })
     } else {
-        // Get Content
-        $.ajax({
-            url: "./pages/"+page+"/"+page+".html",
-            success: function(data){
-                // Load Page
-                fetch("./pages/"+page+"/"+page+".html")
-                    .then(response => {
-                        return response.text()
-                    })
-                        .then(data => {
-                            document.querySelector("coredova-main").innerHTML = data;
-                        });
-            },
-            error: function(data){
-                // Load 404 Page
-                fetch("./pages/404/404.html")
-                    .then(response => {
-                        return response.text()
-                    })
-                        .then(data => {
-                            document.querySelector("coredova-main").innerHTML = data;
-                        });
-            },
-        })
-        // Get Custom CSS from Page
-        $.ajax({
-            url: "./pages/"+page+"/"+page+".css",
-            success: function(data){
-                // Load CSS
-                fetch("./pages/"+page+"/"+page+".css")
-                    .then(response => {
-                        return response.text()
-                    })
-                        .then(data => {
-                            document.querySelector("coredova-main").insertAdjacentHTML("beforebegin", "<style>"+data+"</style>");
-                        });
-            },
-            error: function(data){
-                // Nothing to do
-            },
-        })
-        // Get Custom JS from Page
-        $.ajax({
-            url: "./pages/"+page+"/"+page+".js",
-            success: function(data){
-                // Load JS
-                fetch("./pages/"+page+"/"+page+".js")
-                    .then(response => {
-                        return response.text()
-                    })
-                        .then(data => {
-                            document.querySelector("coredova-main").insertAdjacentHTML("afterend", "<script>"+data+"</script>");
-                        });
-            },
-            error: function(data){
-                // Nothing to do
-            },
-        })
+        // Get Variable of SubPage
+        var subpage = getvar('subpage');
+        if(!subpage) {
+            // Get Page Content
+            $.ajax({
+                url: "./pages/"+page+"/"+page+".html",
+                success: function(data){
+                    // Load Page
+                    fetch("./pages/"+page+"/"+page+".html")
+                        .then(response => {
+                            return response.text()
+                        })
+                            .then(data => {
+                                document.querySelector("coredova-main").innerHTML = data;
+                                $("#page"+page).addClass("text-white bg-primary");
+                            });
+                },
+                error: function(data){
+                    // Load 404 Page
+                    fetch("./pages/404/404.html")
+                        .then(response => {
+                            return response.text()
+                        })
+                            .then(data => {
+                                document.querySelector("coredova-main").innerHTML = data;
+                            });
+                },
+            })
+            // Get Custom CSS from Page
+            $.ajax({
+                url: "./pages/"+page+"/"+page+".css",
+                success: function(data){
+                    // Load CSS
+                    fetch("./pages/"+page+"/"+page+".css")
+                        .then(response => {
+                            return response.text()
+                        })
+                            .then(data => {
+                                document.querySelector("coredova-main").insertAdjacentHTML("beforebegin", "<style>"+data+"</style>");
+                            });
+                },
+                error: function(data){
+                    // Nothing to do
+                },
+            })
+            // Get Custom JS from Page
+            $.ajax({
+                url: "./pages/"+page+"/"+page+".js",
+                success: function(data){
+                    // Load JS
+                    fetch("./pages/"+page+"/"+page+".js")
+                        .then(response => {
+                            return response.text()
+                        })
+                            .then(data => {
+                                document.querySelector("coredova-main").insertAdjacentHTML("afterend", "<script>"+data+"</script>");
+                            });
+                },
+                error: function(data){
+                    // Nothing to do
+                },
+            })
+        } else {
+            // Get SubPage Content
+            $.ajax({
+                url: "./pages/"+page+"/"+subpage+"/"+subpage+".html",
+                success: function(data){
+                    // Load Page
+                    fetch("./pages/"+page+"/"+subpage+"/"+subpage+".html")
+                        .then(response => {
+                            return response.text()
+                        })
+                            .then(data => {
+                                document.querySelector("coredova-main").innerHTML = data;
+                                $("#coll"+page).addClass("show");
+                                $("#page"+page).addClass("text-white bg-primary");
+                                $("#subpage"+subpage).addClass("text-primary");
+                            });
+                },
+                error: function(data){
+                    // Load 404 Page
+                    fetch("./pages/404/404.html")
+                        .then(response => {
+                            return response.text()
+                        })
+                            .then(data => {
+                                document.querySelector("coredova-main").innerHTML = data;
+                            });
+                },
+            })
+            // Get Custom CSS from Page
+            $.ajax({
+                url: "./pages/"+page+"/"+subpage+"/"+subpage+".css",
+                success: function(data){
+                    // Load CSS
+                    fetch("./pages/"+page+"/"+subpage+"/"+subpage+".css")
+                        .then(response => {
+                            return response.text()
+                        })
+                            .then(data => {
+                                document.querySelector("coredova-main").insertAdjacentHTML("beforebegin", "<style>"+data+"</style>");
+                            });
+                },
+                error: function(data){
+                    // Nothing to do
+                },
+            })
+            // Get Custom JS from Page
+            $.ajax({
+                url: "./pages/"+page+"/"+subpage+"/"+subpage+".js",
+                success: function(data){
+                    // Load JS
+                    fetch("./pages/"+page+"/"+subpage+"/"+subpage+".js")
+                        .then(response => {
+                            return response.text()
+                        })
+                            .then(data => {
+                                document.querySelector("coredova-main").insertAdjacentHTML("afterend", "<script>"+data+"</script>");
+                            });
+                },
+                error: function(data){
+                    // Nothing to do
+                },
+            })
+        }
+
     }
 }
 
@@ -161,22 +231,26 @@ function getvar(name,url) {
 
 // Open Sidebar
 function openSideLeft() {
-    document.querySelector("coredova-sidebar-left").style.display = "block";
+    document.querySelector("coredova-sidebar-left").style.marginLeft = "250px";
     document.querySelector("coredova-overlay").style.display = "block";
 }
 function openSideRight() {
-    document.querySelector("coredova-sidebar-right").style.display = "block";
+    document.querySelector("coredova-sidebar-right").style.marginRight = "250px";
     document.querySelector("coredova-overlay").style.display = "block";
 }
 function openSideBottom() {
-    document.querySelector("coredova-sidebar-bottom").style.display = "block";
+    document.querySelector("coredova-sidebar-bottom").style.marginBottom = "250px";
     document.querySelector("coredova-overlay").style.display = "block";
 }
   
 // Close Sidebar
 function closeSide() {
-    document.querySelector("coredova-sidebar-left").style.display = "none";
-    document.querySelector("coredova-sidebar-right").style.display = "none";
-    document.querySelector("coredova-sidebar-bottom").style.display = "none";
+    document.querySelector("coredova-sidebar-left").style.marginLeft = "0px";
+    document.querySelector("coredova-sidebar-right").style.marginRight = "0px";
+    document.querySelector("coredova-sidebar-bottom").style.marginBottom = "0px";
     document.querySelector("coredova-overlay").style.display = "none";
+}
+
+function setTitle(content) {
+    $("#SetTitle").html(content);
 }

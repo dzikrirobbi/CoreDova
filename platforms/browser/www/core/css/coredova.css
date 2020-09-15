@@ -47,28 +47,30 @@ coredova-header .mainLogo {
 /* CoreDova Sidebar */
 coredova-sidebar-left {
   height: 100%;
-  width: 250px;
   position: fixed;
   z-index: 1100;
-  top: 0;
-  left: 0;
   background-color: #fff;
   overflow-x: hidden;
-  transition: opacity 2s ease-out;
-  display: none;
+  top: 0;
+  left: 0;
+  width: 250px;
+  height: 100%;
+  transition: all .4s ease 0s;
+  transform: translateX(-250px);
 }
 
 coredova-sidebar-right {
   height: 100%;
-  width: 250px;
   position: fixed;
   z-index: 1100;
-  top: 0;
-  right: 0;
   background-color: #fff;
   overflow-x: hidden;
-  transition: opacity 2s ease-out;
-  display: none;
+  top: 0;
+  right: 0;
+  width: 250px;
+  height: 100%;
+  transition: all .4s ease 0s;
+  transform: translateX(250px);
 }
 
 coredova-sidebar-bottom {
@@ -79,8 +81,8 @@ coredova-sidebar-bottom {
   bottom: 0;
   background-color: #fff;
   overflow-x: hidden;
-  transition: opacity 2s ease-out;
-  display: none;
+  transition: all .4s ease 0s;
+  transform: translateY(250px);
   border-top-left-radius:40px;
   border-top-right-radius:40px;
 }
@@ -176,6 +178,47 @@ coredova-sidebar-left i,coredova-sidebar-right i,coredova-sidebar-bottom i {
 }
 
 .profile-usermenu ul li.active a {
+  color: #5b9bd1;
+  background-color: #f6f9fb;
+  border-left: 2px solid #5b9bd1;
+  margin-left: -2px;
+}
+
+/* Submenu */
+.submenu ul {
+  list-style: none;
+}
+
+.submenu ul li {
+  border-bottom: 1px solid #f0f4f7;
+  padding: .5rem 1rem;
+}
+
+.submenu ul li:last-child {
+  border-bottom: none;
+}
+
+.submenu ul li a {
+  color: #93a3b5;
+  font-size: 14px;
+  font-weight: 400;
+}
+
+.submenu ul li a i {
+  margin-right: 8px;
+  font-size: 14px;
+}
+
+.submenu ul li a:hover {
+  background-color: #fafcfd;
+  color: #5b9bd1;
+}
+
+.submenu ul li.active {
+  border-bottom: none;
+}
+
+.submenu ul li.active a {
   color: #5b9bd1;
   background-color: #f6f9fb;
   border-left: 2px solid #5b9bd1;
